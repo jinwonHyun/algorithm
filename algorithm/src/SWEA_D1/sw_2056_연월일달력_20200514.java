@@ -12,22 +12,24 @@ public class sw_2056_연월일달력_20200514 {
 	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 	static int T, MM, DD;
 	static String YMD;
+	static boolean FLAG;
 
 	public static void main(String[] args) {
 		try {
 			T = Integer.parseInt(br.readLine().trim());
 			for (int tc = 1; tc <= T; tc++) {
+				FLAG = false;
 				YMD = br.readLine().trim();
 				MM = Integer.parseInt(YMD.substring(4, 6));
 				DD = Integer.parseInt(YMD.substring(6, 8));
 
 				if (0 >= MM || MM > 12 || 0 >= DD || DD > 31) {
-					System.out.println("#" + tc + " -1");
+					FLAG = true;
 				} else {
 					switch (MM) {
 					case 2:
 						if (DD > 28) {
-							System.out.println("#" + tc + " -1");
+							FLAG = true;
 						}
 						break;
 					case 4:
@@ -35,15 +37,20 @@ public class sw_2056_연월일달력_20200514 {
 					case 9:
 					case 11:
 						if (DD > 30) {
-							System.out.println("#" + tc + " -1");
+							FLAG = true;
 						}
 						break;
 
 					default:
-						System.out.println("#######");
-//						System.out.println(YMD);
+
 						break;
 					}
+				}
+				if (!FLAG) {
+					System.out.println("#" + tc + " " + YMD.substring(0,4) + "/" + YMD.substring(4, 6) + "/"
+							+ YMD.substring(6, 8));
+				} else {
+					System.out.println("#" + tc + " -1");
 				}
 			}
 		} catch (NumberFormatException e) {
